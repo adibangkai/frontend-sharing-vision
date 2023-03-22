@@ -92,6 +92,7 @@ export default function ArticleForm({
             setFormState((s) => ({ ...s, content: e.target.value }))
           }
           minLength={200}
+          rows={8}
           required
         ></textarea>
         <input

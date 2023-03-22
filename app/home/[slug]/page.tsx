@@ -1,9 +1,10 @@
+import { Article, ArticleProps } from "@/lib/utils";
 import Link from "next/link";
 
 const getPosts = async (page: number) => {
   const offset: number = 4 * (page - 1);
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/published/4/${offset}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/status/Publish/4/${offset}`,
     {
       cache: "no-cache",
     }
@@ -11,28 +12,34 @@ const getPosts = async (page: number) => {
 
   return res.json();
 };
-interface ArticleProps {
-  title: string;
-  content: string;
-  category: string;
-  id: string;
-  status: string;
-}
-interface Article {
-  data: ArticleProps[];
-}
+
+const getTotal = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/status/Publish`, {
+    cache: "no-cache",
+  });
+
+  // Recommendation: handle errors
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+};
+
 export default async function PaginatePage({
   params,
 }: {
   params: { slug: number };
 }) {
-  console.log(params.slug);
   const { data }: Article = await getPosts(params.slug);
+  const total = await getTotal();
 
   if (data.length === 0) {
     return <div className="text-center pt-10">there's no post yet</div>;
   }
-  const totalPage = data.length > 4 ? data.length / 4 : 1;
+  const totalPage =
+    total.data.length > 4 ? Math.ceil(total.data.length / 4) : 1;
 
   return (
     <div className="grid gap-3 w-full md:w-3/4  px-4 pl-10">

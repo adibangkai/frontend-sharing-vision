@@ -1,16 +1,8 @@
+import { Article } from "@/lib/utils";
 import Link from "next/link";
 import { Edit } from "react-feather";
 import TrashedButton from "./TrashedButton";
-interface ArticleProps {
-  title: string;
-  content: string;
-  category: string;
-  id: string;
-  status: string;
-}
-interface Article {
-  data: ArticleProps[];
-}
+
 export default function DashTable({ data }: Article) {
   if (data.length === 0)
     return <div className="text-center">there's no post on this status</div>;

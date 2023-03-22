@@ -1,17 +1,11 @@
 "use client";
 
+import { ArticleProps } from "@/lib/utils";
 import { Tab } from "@headlessui/react";
 import clsx from "clsx";
 import Link from "next/link";
 import DashTable from "./DashTable";
 
-interface ArticleProps {
-  title: string;
-  content: string;
-  category: string;
-  status: string;
-  id: string;
-}
 interface TabProps {
   published: ArticleProps[];
   drafted: ArticleProps[];
