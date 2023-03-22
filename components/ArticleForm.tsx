@@ -59,7 +59,7 @@ export default function ArticleForm({
         // Refresh the current route and fetch new data from the server without
         // losing client-side browser or React state.
         router.refresh();
-        router.replace("/dashboard/");
+        router.replace("/home");
       });
     } catch (e) {
       window.alert("something wrong");
