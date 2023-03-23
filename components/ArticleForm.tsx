@@ -12,10 +12,10 @@ export default function ArticleForm({
   mode: "add" | "edit";
   id: string | null;
 }) {
+  const router = useRouter();
   const [formState, setFormState] = useState({ ...initial });
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
-  const router = useRouter();
   useEffect(() => {
     if (mode === "edit") {
       setLoading(true);
@@ -44,8 +44,6 @@ export default function ArticleForm({
             "Content-Type": "application/json",
           },
         });
-        router.refresh();
-        router.replace("/dashboard/");
       } else {
         await fetch(`${process.env.NEXT_PUBLIC_API_URL}/article/${id}`, {
           method: "PUT",
@@ -55,10 +53,10 @@ export default function ArticleForm({
             "Content-Type": "application/json",
           },
         });
-
-        router.refresh();
-        router.replace("/dashboard/");
       }
+
+      router.replace("/dashboard/");
+      router.refresh();
     } catch (e) {
       window.alert("something wrong");
     }
