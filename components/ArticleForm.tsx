@@ -31,7 +31,7 @@ export default function ArticleForm({
       fetchData();
     }
   }, []);
-  if (isLoading) return <ArticleFormSkeleton />;
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
@@ -44,6 +44,8 @@ export default function ArticleForm({
             "Content-Type": "application/json",
           },
         });
+        router.refresh();
+        router.replace("/dashboard/");
       } else {
         await fetch(`${process.env.NEXT_PUBLIC_API_URL}/article/${id}`, {
           method: "PUT",
@@ -53,14 +55,15 @@ export default function ArticleForm({
             "Content-Type": "application/json",
           },
         });
-      }
 
-      router.refresh();
-      router.replace("/dashboard/");
+        router.refresh();
+        router.replace("/dashboard/");
+      }
     } catch (e) {
       window.alert("something wrong");
     }
   };
+  if (isLoading) return <ArticleFormSkeleton />;
 
   return (
     <div className=" mt-4">
