@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { FormEvent, useEffect, useState, useTransition } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import ArticleFormSkeleton from "./ArticleFormSkeleton";
 
 const initial = { title: "", content: "", category: "", status: "" };
@@ -13,7 +13,6 @@ export default function ArticleForm({
   id: string | null;
 }) {
   const [formState, setFormState] = useState({ ...initial });
-  const [isPending, startTransition] = useTransition();
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
   const router = useRouter();
@@ -55,12 +54,9 @@ export default function ArticleForm({
           },
         });
       }
-      startTransition(() => {
-        // Refresh the current route and fetch new data from the server without
-        // losing client-side browser or React state.
-        router.refresh();
-        router.replace("/dashboard/");
-      });
+
+      router.refresh();
+      router.replace("/dashboard/");
     } catch (e) {
       window.alert("something wrong");
     }
