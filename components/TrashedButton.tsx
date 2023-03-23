@@ -19,7 +19,7 @@ export default function TrashedButton({ id, data }: { id: string; data: any }) {
         },
       });
       router.refresh();
-      router.replace("/home/");
+      router.replace("/dashboard/");
     } catch (e) {
       window.alert("error");
     }
