@@ -8,7 +8,7 @@ sebelum di run buat file .env, lalu tambahkan variable ini :
 
 ```code
 //link backend sesuaikan dengan link localhost, atau bisa gunakan link prod ini
-NEXT_PUBLIC_API_URL=https://flask-sharing-vision-production.up.railway.app/
+NEXT_PUBLIC_API_URL=https://flask-sharing-vision-production.up.railway.app
 
 ```
 
