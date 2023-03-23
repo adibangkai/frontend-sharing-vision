@@ -14,7 +14,7 @@ const getArticle = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/article/`, {
     cache: "no-cache",
     next: {
-      revalidate: 10, // 10 seconds
+      revalidate: 36000,
     },
   });
 
