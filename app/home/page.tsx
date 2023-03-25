@@ -6,6 +6,9 @@ const getPosts = async () => {
     `${process.env.NEXT_PUBLIC_API_URL}/status/Publish/4/0`,
     {
       cache: "no-cache",
+      next: {
+        revalidate: 36000,
+      },
     }
   );
 
